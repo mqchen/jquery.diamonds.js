@@ -14,12 +14,14 @@
             rowUpperWrap : '<div class="diamond-row-upper"></div>',
             rowLowerWrap : '<div class="diamond-row-lower"></div>',
             diamondWrap : '<div class="diamonds"></div>',
-            overrideCss : '.diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamond-box { border-width: {{gap}}px }'
+            overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }'
         };
         this.setOptions(customOptions);
         
         this.itemElements = $(this.options.itemSelector, this.options.wrapElement);
         
+        this.guid = this._createGuid();
+
         // Create override css
         this.styleElement = this._createOverrideCss();
         
@@ -28,6 +30,10 @@
         
         // Auto redraw
         this.startAutoRedraw();
+    };
+
+    Diamonds.prototype._createGuid = function() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
     };
     
     Diamonds.prototype.destroy = function() {
@@ -39,8 +45,16 @@
     
     Diamonds.prototype._createOverrideCss = function() {
         var css = this.options.overrideCss;
-        css = css.replace(new RegExp("{{size}}", 'g'), this.options.size);
-        css = css.replace(new RegExp("{{gap}}", 'g'), this.options.gap);
+        var data = {
+            "size" : this.options.size,
+            "gap" : this.options.gap,
+            "guid" : this.guid
+        }
+        for(var key in data) {
+            if(data.hasOwnProperty(key)) {
+                css = css.replace(new RegExp("{{" + key + "}}", 'g'), data[key]);
+            }
+        }
         
         var style = $('<style type="text/css"></style>');
         style.html(css);
@@ -109,6 +123,7 @@
     
     Diamonds.prototype._renderHtml = function(rows) {
         var wrap = $(this.options.diamondWrap);
+        wrap.addClass("diamonds-" + this.guid);
         for(var i = 0; i < rows.length; i += 2) {
             var row = $(this.options.rowWrap);
             var upper = $(this.options.rowUpperWrap);
