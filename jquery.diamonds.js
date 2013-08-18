@@ -41,6 +41,7 @@
         this.stopAutoRedraw();
         this._emptyElement(this.options.wrapElement);
         this.options.wrapElement.append(this.itemElements);
+        this.options.wrapElement.removeData("diamonds");
     };
     
     Diamonds.prototype._createOverrideCss = function() {
