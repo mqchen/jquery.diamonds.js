@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Diamonds.js demo</title>
+	<link rel="stylesheet" type="text/css" href="diamonds.css" />
+	<style type="text/css">
+		/* CSS for demo */
+		.diamondswrap {
+			text-align: center;
+		}
+	    .diamond-box:hover {
+	        opacity: 0.7;
+	    }
+		.diamond-box-inner {
+		    background-color: #666;
+		    color: white;
+		    padding: 40%;
+		}
+	</style>
+</head>
+<body>
+	<div class="diamondswrap">
+	    <div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+		<div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello world</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	    <div class="item">Hello</div>
+	</div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.diamonds.js"></script>
+	<script type="text/javascript">
+		$(".diamondswrap").diamonds({
+		    size: 250, 
+		    gap: 0.5,
+		    hideIncompleteRow : true
+		});
+	</script>
+</body>
+</html>
