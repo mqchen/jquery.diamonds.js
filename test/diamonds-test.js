@@ -82,7 +82,8 @@ buster.testCase("Diamonds test", {
 		var size = 200;
 		$(this.testHtml).css("width", size * 5);
 		$(this.testHtml).diamonds({
-			"size": size
+			"size": size,
+			"autoRedraw": true
 		});
 		shouldFitDiamondsPerRow(this.testHtml, 5);
 
