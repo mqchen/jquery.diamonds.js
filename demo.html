@@ -5,52 +5,61 @@
 	<link rel="stylesheet" type="text/css" href="diamonds.css" />
 	<style type="text/css">
 		/* CSS for demo */
+		.item {
+			display: block;
+			width: 100%;
+			height: 100%;
+			padding: 40%;
+
+			background-color: #666;
+		    color: white;
+
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+			.item:hover {
+				opacity: 0.7;
+			}
 		.diamondswrap {
 			text-align: center;
-		}
-	    .diamond-box:hover {
-	        opacity: 0.7;
-	    }
-		.diamond-box-inner {
-		    background-color: #666;
-		    color: white;
-		    padding: 40%;
 		}
 	</style>
 </head>
 <body>
 	<div class="diamondswrap">
-	    <div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-		<div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello world</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
-	    <div class="item">Hello</div>
+	    <a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+		<a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello world</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
+	    <a href="#" class="item">Hello</a>
 	</div>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.diamonds.js"></script>
 	<script type="text/javascript">
 		$(".diamondswrap").diamonds({
 		    size: 250, 
-		    gap: 0.5,
+		    gap: 1,
 		    hideIncompleteRow : true
 		});
 	</script>

@@ -22,8 +22,8 @@
     bottom: 0;
 }
     .diamond-row-lower .diamond-box {
-        margin-left: 64.75%;
-        margin-top: 64.75%;
+        margin-left: 64.644660941%; /* 0.5 + 1 / sqrt(2) / 2 */
+        margin-top: 64.644660941%;
     }
 
 .diamond-box-wrap {
@@ -48,11 +48,11 @@
     position: relative;
     z-index: 1;
     
-    width: 70.5%;
-    height: 70.5%;
-    margin: 14.75%;
+    width: 70.710678118%; /* x = sqrt(x^2 / 2) = 1 / sqrt(2) = 0.70710678118 */
+    height: 70.710678118%;
+    margin: 14.644660941%;
     
-    border: 0.5px solid transparent;
+    border: 1px solid transparent;
 }
 
 .diamond-box-inner {
@@ -71,7 +71,7 @@
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     
-    width: 141.5%;
-    height: 141.5%;
-    margin: -20.5% 0 0 -20.5%;
+    width: 141.421356237%; /* sqrt(2) */
+    height: 141.421356237%;
+    margin: -20.7106781185% 0 0 -20.7106781185%; /* (1 - sqrt(2)) / 2 */
 }
