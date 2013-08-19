@@ -33,10 +33,10 @@
 }
 
 .diamond-box {
-    -webkit-transform: rotateZ(45deg);
-    -moz-transform: rotateZ(45deg);
-    -ms-transform: rotateZ(45deg);
-    transform: rotateZ(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -56,10 +56,10 @@
 }
 
 .diamond-box-inner {
-    -webkit-transform: rotateZ(-45deg);
-    -moz-transform: rotateZ(-45deg);
-    -ms-transform: rotateZ(-45deg);
-    transform: rotateZ(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 
     -webkit-transform-origin: center center;
     -moz-transform-origin: center center;
