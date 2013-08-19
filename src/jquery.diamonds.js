@@ -1,4 +1,4 @@
-(function($) {
+(function($, window, document, undefined) {
     'use strict';
     
     var Diamonds = function(customOptions) {
@@ -149,7 +149,9 @@
     Diamonds.prototype.draw = function() {
         this._emptyElement(this.options.wrapElement);
         
-        var rows = this._groupIntoRows(this.itemElements, Math.floor(this.options.wrapElement.width() / this.options.size), this.options.hideIncompleteRow);
+        var rows = this._groupIntoRows(this.itemElements,
+            Math.floor(this.options.wrapElement.width() / this.options.size),
+            this.options.hideIncompleteRow);
         
         var html = this._renderHtml(rows);
         
@@ -161,7 +163,7 @@
     $.fn.diamonds = function(method) {
         
         // Initialize
-        if(method === undefined || typeof method === "object") {
+        if(method === undefined || $.isPlainObject(method)) {
             method = method || {};
             method.wrapElement = this;
             this.data("diamonds", new Diamonds(method));
@@ -179,4 +181,4 @@
             return ret === undefined ? this : ret;
         }
     };
-})(jQuery);
+})(jQuery, window, document);
