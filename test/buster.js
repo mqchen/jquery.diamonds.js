@@ -9,6 +9,12 @@ config["Diamonds tests"] = {
 	sources: [
 		"src/**/*.js"
 	],
+	resources: [
+		{
+			path: "diamonds.css",
+			file: "src/diamonds.css"
+		}
+	],
 	tests: [
 		"test/**/*-test.js"
 	]
