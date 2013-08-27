@@ -57,10 +57,12 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="../src/jquery.diamonds.js"></script>
 	<script type="text/javascript">
-		$(".diamondswrap").diamonds({
-		    size: 250, 
-		    gap: 1,
-		    hideIncompleteRow : true
+		$(document).ready(function() {
+			$(".diamondswrap").diamonds({
+			    size: 250, 
+			    gap: 1,
+			    hideIncompleteRow : true
+			});
 		});
 	</script>
 </body>

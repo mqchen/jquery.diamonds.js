@@ -9,6 +9,7 @@
             gap : 0.5,
             autoRedraw : true,
             hideIncompleteRow : false,
+            scrollbarWidth : null,
             itemWrap : '<div class="diamond-box-wrap"><div class="diamond-box"><div class="diamond-box-inner"></div></div></div>',
             rowWrap : '<div class="diamond-row-wrap"></div>',
             rowUpperWrap : '<div class="diamond-row-upper"></div>',
@@ -91,6 +92,22 @@
             $.extend(true, this.options, customOptions);
         }
     };
+
+    Diamonds.prototype._getScrollbarWidth = function() {
+        if(isNaN(this.options.scrollbarWidth) && this.options.scrollbarWidth >= 0) return this.scrollbarWidth;
+        var $inner = $('<div style="width: 100%; height:200px;">test</div>'),
+            $outer = $('<div style="width:200px;height:150px; position: absolute; top: 0; left: 0; visibility: hidden; overflow:hidden;"></div>').append($inner),
+            inner = $inner[0],
+            outer = $outer[0];
+         
+        $('body').append(outer);
+        var width1 = inner.offsetWidth;
+        $outer.css('overflow', 'scroll');
+        var width2 = outer.clientWidth;
+        $outer.remove();
+
+        return this.scrollbarWidth = (width1 - width2);
+    };
     
     Diamonds.prototype._emptyElement = function(element) {
         $("*", element).detach();
@@ -148,13 +165,14 @@
     
     Diamonds.prototype.draw = function() {
         this._emptyElement(this.options.wrapElement);
+        var width = this.options.wrapElement.innerWidth() - this._getScrollbarWidth();
         
         var rows = this._groupIntoRows(this.itemElements,
-            Math.floor(this.options.wrapElement.width() / this.options.size),
+            Math.floor(width / this.options.size),
             this.options.hideIncompleteRow);
         
         var html = this._renderHtml(rows);
-        
+
         this.options.wrapElement.append(html);
     };
     
