@@ -69,6 +69,11 @@
     Diamonds.prototype._removeOverrideCss = function() {
         this.styleElement.remove();
     };
+
+    Diamonds.prototype._updateOverrideCss = function() {
+        this._removeOverrideCss();
+        this._createOverrideCss();
+    };
     
     Diamonds.prototype.stopAutoRedraw = function() {
         window.clearInterval(this.redrawer);
@@ -91,6 +96,9 @@
     Diamonds.prototype.setOptions = function(customOptions) {
         if(customOptions !== null && typeof customOptions === "object") {
             $.extend(true, this.options, customOptions);
+
+            this._updateOverrideCss();
+            this.draw();
         }
     };
 
