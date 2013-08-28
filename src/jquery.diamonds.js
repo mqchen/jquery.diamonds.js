@@ -18,7 +18,7 @@
             diamondWrap : $('<div class="diamonds"></div>'),
             overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }'
         };
-        this.setOptions(customOptions);
+        this.setOptions(customOptions, false);
         
         this.itemElements = $(this.options.itemSelector, this.options.wrapElement);
         
@@ -67,7 +67,7 @@
     };
     
     Diamonds.prototype._removeOverrideCss = function() {
-        this.styleElement.remove();
+        if(this.styleElement) this.styleElement.remove();
     };
 
     Diamonds.prototype._updateOverrideCss = function() {
@@ -93,12 +93,15 @@
         }
     };
     
-    Diamonds.prototype.setOptions = function(customOptions) {
+    Diamonds.prototype.setOptions = function(customOptions, redraw) {
+        redraw = redraw === undefined ? true : redraw;
         if(customOptions !== null && typeof customOptions === "object") {
             $.extend(true, this.options, customOptions);
-
-            this._updateOverrideCss();
-            this.draw();
+            
+            if(redraw) {
+                this._updateOverrideCss();
+                this.draw();
+            }
         }
     };
 
