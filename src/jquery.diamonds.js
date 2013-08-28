@@ -10,11 +10,12 @@
             autoRedraw : true,
             hideIncompleteRow : false,
             scrollbarWidth : null,
-            itemWrap : '<div class="diamond-box-wrap"><div class="diamond-box"><div class="diamond-box-inner"></div></div></div>',
-            rowWrap : '<div class="diamond-row-wrap"></div>',
-            rowUpperWrap : '<div class="diamond-row-upper"></div>',
-            rowLowerWrap : '<div class="diamond-row-lower"></div>',
-            diamondWrap : '<div class="diamonds"></div>',
+            minDiamondsPerRow : 2,
+            itemWrap : $('<div class="diamond-box-wrap"><div class="diamond-box"><div class="diamond-box-inner"></div></div></div>'),
+            rowWrap : $('<div class="diamond-row-wrap"></div>'),
+            rowUpperWrap : $('<div class="diamond-row-upper"></div>'),
+            rowLowerWrap : $('<div class="diamond-row-lower"></div>'),
+            diamondWrap : $('<div class="diamonds"></div>'),
             overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }'
         };
         this.setOptions(customOptions);
@@ -115,7 +116,7 @@
     
     Diamonds.prototype._groupIntoRows = function(items, maxDiamondsPerRow, hideIncompleteRow) {
         // Max number of diamonds per row
-        maxDiamondsPerRow = Math.max(2, maxDiamondsPerRow);
+        maxDiamondsPerRow = Math.max(this.options.minDiamondsPerRow, maxDiamondsPerRow);
         
         // Draw rows
         var rows = new Array();
@@ -140,12 +141,12 @@
     };
     
     Diamonds.prototype._renderHtml = function(rows) {
-        var wrap = $(this.options.diamondWrap);
+        var wrap = this.options.diamondWrap.clone();
         wrap.addClass("diamonds-" + this.guid);
         for(var i = 0; i < rows.length; i += 2) {
-            var row = $(this.options.rowWrap);
-            var upper = $(this.options.rowUpperWrap);
-            var lower = $(this.options.rowLowerWrap);
+            var row = this.options.rowWrap.clone();
+            var upper = this.options.rowUpperWrap.clone();
+            var lower = this.options.rowLowerWrap.clone();
             row.append(upper).append(lower);
             wrap.append(row);
             
@@ -159,12 +160,15 @@
                 $(rows[i + 1][j]).wrap(this.options.itemWrap);
             }
         }
-        
+
+        wrap.css("min-width", this.options.minDiamondsPerRow * this.options.size);
+
         return wrap;
     };
     
     Diamonds.prototype.draw = function() {
         this._emptyElement(this.options.wrapElement);
+
         var width = this.options.wrapElement.innerWidth() - this._getScrollbarWidth();
         
         var rows = this._groupIntoRows(this.itemElements,
