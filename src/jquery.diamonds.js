@@ -3,7 +3,6 @@
     
     var Diamonds = function(customOptions) {
         this.options = {
-            wrapElement : null,
             itemSelector : ".item",
             size : 250,
             gap : 0.5,
@@ -11,6 +10,7 @@
             hideIncompleteRow : false,
             scrollbarWidth : null,
             minDiamondsPerRow : 2,
+            eventPrefix : "diamonds:",
             itemWrap : $('<div class="diamond-box-wrap"><div class="diamond-box"><div class="diamond-box-inner"></div></div></div>'),
             rowWrap : $('<div class="diamond-row-wrap"></div>'),
             rowUpperWrap : $('<div class="diamond-row-upper"></div>'),
@@ -18,9 +18,13 @@
             diamondWrap : $('<div class="diamonds"></div>'),
             overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }'
         };
+        this.wrapElement = customOptions.wrapElement;
+
+        if(this._triggerEvent("beforeInit")) return;
+
         this.setOptions(customOptions, false);
         
-        this.itemElements = $(this.options.itemSelector, this.options.wrapElement);
+        this.itemElements = $(this.options.itemSelector, this.wrapElement);
         
         this.guid = this._createGuid();
 
@@ -32,6 +36,17 @@
         
         // Auto redraw
         this.startAutoRedraw();
+
+        if(this._triggerEvent("afterInit")) return;
+    };
+
+    /**
+     * Returns true if we should stop
+     */
+    Diamonds.prototype._triggerEvent = function(event, data) {
+        var e = $.Event(this.options.eventPrefix + event);
+        this.wrapElement.trigger(e, data);
+        return e.isDefaultPrevented();
     };
 
     Diamonds.prototype._createGuid = function() {
@@ -39,11 +54,13 @@
     };
     
     Diamonds.prototype.destroy = function() {
+        this._triggerEvent("beforeDestroy");
         this._removeOverrideCss();
         this.stopAutoRedraw();
-        this._emptyElement(this.options.wrapElement);
-        this.options.wrapElement.append(this.itemElements);
-        this.options.wrapElement.removeData("diamonds");
+        this._emptyElement(this.wrapElement);
+        this.wrapElement.append(this.itemElements);
+        this.wrapElement.removeData("diamonds");
+        this._triggerEvent("afterDestroy");
     };
     
     Diamonds.prototype._createOverrideCss = function() {
@@ -76,32 +93,44 @@
     };
     
     Diamonds.prototype.stopAutoRedraw = function() {
+        if(this._triggerEvent("beforeStopAutoRedraw")) return;
         window.clearInterval(this.redrawer);
+        if(this._triggerEvent("afterStopAutoRedraw")) return;
     };
     
     Diamonds.prototype.startAutoRedraw = function() {
-        this.stopAutoRedraw(); // Stop previous
-        var lastWidth = this.options.wrapElement.width();
+        window.clearInterval(this.redrawer); // Stop previous
+        var lastWidth = this.wrapElement.width();
         if(this.options.autoRedraw) {
+            if(this._triggerEvent("beforeStartAutoRedraw")) return;
+            
             this.redrawer = window.setInterval(function() {
-                var curWidth = this.options.wrapElement.width();
+                var curWidth = this.wrapElement.width();
                 if(curWidth !== lastWidth) {
+                    if(this._triggerEvent("onAutoResize", {before: lastWidth, current: curWidth})) return;
                     lastWidth = curWidth;
                     this.draw();
                 }
             }.bind(this), 50);
+
+            if(this._triggerEvent("afterStartAutoRedraw")) return;
         }
     };
     
     Diamonds.prototype.setOptions = function(customOptions, redraw) {
         redraw = redraw === undefined ? true : redraw;
         if(customOptions !== null && typeof customOptions === "object") {
+            
+            if(this._triggerEvent("beforeSetOptions", customOptions)) return;
+
             $.extend(true, this.options, customOptions);
             
             if(redraw) {
                 this._updateOverrideCss();
                 this.draw();
             }
+
+            if(this._triggerEvent("afterSetOptions", customOptions)) return;
         }
     };
 
@@ -178,9 +207,11 @@
     };
     
     Diamonds.prototype.draw = function() {
-        this._emptyElement(this.options.wrapElement);
+        if(this._triggerEvent("beforeDraw")) return;
 
-        var width = this.options.wrapElement.innerWidth() - this._getScrollbarWidth();
+        this._emptyElement(this.wrapElement);
+
+        var width = this.wrapElement.innerWidth() - this._getScrollbarWidth();
         
         var rows = this._groupIntoRows(this.itemElements,
             Math.floor(width / this.options.size),
@@ -188,7 +219,9 @@
         
         var html = this._renderHtml(rows);
 
-        this.options.wrapElement.append(html);
+        this.wrapElement.append(html);
+
+        if(this._triggerEvent("afterDraw")) return;
     };
     
     
