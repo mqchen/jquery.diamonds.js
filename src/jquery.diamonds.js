@@ -54,12 +54,14 @@
     };
     
     Diamonds.prototype.destroy = function() {
-        this._triggerEvent("beforeDestroy");
+        if(this._triggerEvent("beforeDestroy")) return;
+        
         this._removeOverrideCss();
         this.stopAutoRedraw();
         this._emptyElement(this.wrapElement);
         this.wrapElement.append(this.itemElements);
         this.wrapElement.removeData("diamonds");
+
         this._triggerEvent("afterDestroy");
     };
     
