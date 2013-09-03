@@ -8,7 +8,7 @@
             gap : 0.5,
             autoRedraw : true,
             hideIncompleteRow : false,
-            scrollbarWidth : null,
+            scrollbarWidth : 0,
             minDiamondsPerRow : 2,
             eventPrefix : "diamonds:",
             itemWrap : $('<div class="diamond-box-wrap"><div class="diamond-box"><div class="diamond-box-inner"></div></div></div>'),
@@ -37,7 +37,7 @@
         // Auto redraw
         this.startAutoRedraw();
 
-        if(this._triggerEvent("afterInit")) return;
+        this._triggerEvent("afterInit");
     };
 
     /**
@@ -97,7 +97,7 @@
     Diamonds.prototype.stopAutoRedraw = function() {
         if(this._triggerEvent("beforeStopAutoRedraw")) return;
         window.clearInterval(this.redrawer);
-        if(this._triggerEvent("afterStopAutoRedraw")) return;
+        this._triggerEvent("afterStopAutoRedraw");
     };
     
     Diamonds.prototype.startAutoRedraw = function() {
@@ -115,7 +115,7 @@
                 }
             }.bind(this), 50);
 
-            if(this._triggerEvent("afterStartAutoRedraw")) return;
+            this._triggerEvent("afterStartAutoRedraw");
         }
     };
     
@@ -132,12 +132,15 @@
                 this.draw();
             }
 
-            if(this._triggerEvent("afterSetOptions", customOptions)) return;
+            this._triggerEvent("afterSetOptions", customOptions);
         }
     };
 
     Diamonds.prototype._getScrollbarWidth = function() {
-        if(isNaN(this.options.scrollbarWidth) && this.options.scrollbarWidth >= 0) return this.scrollbarWidth;
+        if($.isNumeric(this.options.scrollbarWidth) && this.options.scrollbarWidth >= 0) {
+            return this.options.scrollbarWidth;
+        }
+
         var $inner = $('<div style="width: 100%; height:200px;">test</div>'),
             $outer = $('<div style="width:200px;height:150px; position: absolute; top: 0; left: 0; visibility: hidden; overflow:hidden;"></div>').append($inner),
             inner = $inner[0],
@@ -158,8 +161,8 @@
     
     Diamonds.prototype._groupIntoRows = function(items, maxDiamondsPerRow, hideIncompleteRow) {
         // Max number of diamonds per row
-        maxDiamondsPerRow = Math.max(this.options.minDiamondsPerRow, maxDiamondsPerRow);
-        
+        maxDiamondsPerRow = Math.max(this.options.minDiamondsPerRow, 0 + maxDiamondsPerRow);
+
         // Draw rows
         var rows = new Array();
         for(var i = 0; i < items.length; i++) {
@@ -213,7 +216,13 @@
 
         this._emptyElement(this.wrapElement);
 
-        var width = this.wrapElement.innerWidth() - this._getScrollbarWidth();
+        // Zepto version
+        var width = this.wrapElement.width() 
+            - parseFloat("" + this.wrapElement.css("padding-left"))
+            - parseFloat("" + this.wrapElement.css("padding-right"))
+            - this._getScrollbarWidth();
+
+        // var width = this.wrapElement.innerWidth() - this._getScrollbarWidth(); // jQuery
         
         var rows = this._groupIntoRows(this.itemElements,
             Math.floor(width / this.options.size),
@@ -223,7 +232,7 @@
 
         this.wrapElement.append(html);
 
-        if(this._triggerEvent("afterDraw")) return;
+        this._triggerEvent("afterDraw");
     };
     
     
@@ -249,4 +258,4 @@
             return ret === undefined ? this : ret;
         }
     };
-})(jQuery, window, document);
+})(window.hasOwnProperty("Zepto") ? window.Zepto : window.jQuery, window, document);

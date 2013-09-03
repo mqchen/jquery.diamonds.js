@@ -4,7 +4,8 @@ config["Diamonds tests"] = {
 	environment: "browser",
 	rootPath: "../",
 	libs: [
-		"test/jquery.js"
+		"test/jquery.js",
+		// "test/zepto.js"
 	],
 	sources: [
 		"src/**/*.js"

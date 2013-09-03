@@ -21,7 +21,7 @@ var shouldFitDiamondsPerRow = function(html, num, skipLastRow) {
 
 buster.testCase("Diamonds test", {
 
-	"js" : {
+	"js:" : {
 		"setUp" : function() {
 			this.testHtml = $('<div class="wrapper"></div>');
 			this.itemsCount = 100;
