@@ -2,6 +2,13 @@
 
 Tired of straight grids where everything is vertically and horizontally aligned? Why not tilt everything by 45 degrees? This jQuery plugin lets you easily do just that!
 
+## Features
+
+- Auto resizes
+- No images, all css
+- AMD aware plugin
+- Test coverage!
+
 ## Demo
 
 See `/demo/demo.html` in this repo.
@@ -11,6 +18,10 @@ See `/demo/demo.html` in this repo.
 Add this to your `<head>`
 	
 	<link rel="stylesheet" type="text/css" href="diamonds.css" />
+
+Add this right before your closing `</body>`
+	
+	<script type="text/javascript" src="jquery.diamonds.js"></script>
 
 *Note*: The path may change depending on where you put the css file.
 
