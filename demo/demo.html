@@ -1,157 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Diamonds.js demo</title>
+	<title>jquery.diamonds.js demo</title>
 	<link rel="stylesheet" type="text/css" href="../src/diamonds.css" />
-	<style type="text/css">
-		/* CSS for demo */
-		.item {
-			display: block;
-			position: relative;
-			width: 100%;
-			height: 100%;
-			padding: 40% 0;
-
-			background-color: #666;
-		    color: white;
-		    background-position: center center;
-		    background-size: cover;
-
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-			box-sizing: border-box;
-		}
-			.item:hover:after {
-				content: "";
-				display: block;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(255, 255, 255, 0.7);
-			}
-		.diamondswrap {
-			text-align: center;
-			background-color: #e0e0e0;
-			padding: 20px 20px 100px 20px;
-		}
-
-		.controls {
-			background-color: #272822;
-			padding: 20px;
-		}
-			.code {
-				background-color: #272822;
-				color: #F8F8F2;
-			}
-				.code * {
-					font-family: monospace;
-				}
-			.code .int {
-				color: #AE81FF;
-			}
-			.code .bool {
-				color: #AE81FF;
-			}
-			.code .string {
-				color: #E6DB74;
-			}
-			.code .var {
-				color: #F92672;
-			}
-			.code .comment {
-				color: #75715E;
-			}
-			.code input, .code select {
-				background-color: transparent;
-				border: 1px dotted #555;
-				padding: 2px 5px;
-				text-align: center;
-			}
-
-			.code input {
-				width: 50px;
-			}
-			.code select {
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
-			}
-	</style>
+	<link rel="stylesheet" type="text/css" href="demo.css" />
 </head>
 <body>
 	<div class="controls">
 		<form id="diamondsControls">
 			<pre class="code">
-<span class="var">$</span>(<span class="string">"#flickrItems"</span>).diamonds({
-    size : <input name="size" type="text" value="150" step="1" class="int" />,
-    gap :  <input name="gap" type="text" value="1" step="1" class="int" />,
-    hideIncompleteRow : <select class="bool" name="hideIncompleteRows"><option value="true">true</option><option value="false" selected="selected">false</option></select> <span class="comment">// default: false</span>
-    autoRedraw : <select class="bool" name="autoRedraw"><option value="true" selected="selected">true</option><option value="false">false</option></select> <span class="comment">// default: true</span>
-});</pre>
+<span class="tag">&lt;<span class="tagname">link</span> <span class="attrname">href</span>=<span class="attrval">"<a href="https://github.com/mqchen/diamonds.js/blob/master/src/diamonds.css">diamonds.css</a>"</span> /&gt;</span>
+<span class="tag">&lt;<span class="tagname">script</span> <span class="attrname">src</span>=<span class="attrval">"<a href="https://github.com/mqchen/diamonds.js/blob/master/src/jquery.diamonds.js">jquery.diamonds.js</a>"</span>&gt;</span><span class="tag">&lt;/<span class="tagname">script</span>&gt;</span>
+<span class="tag">&lt;<span class="tagname">script</span>&gt;</span>
+	<span class="var">$</span>(<span class="string">"#flickrItems"</span>).<a href="https://github.com/mqchen/diamonds.js">diamonds</a>({
+	    <a href="https://github.com/mqchen/diamonds.js#size">size</a> : <input name="size" type="text" value="200" class="int" />,
+	    <a href="https://github.com/mqchen/diamonds.js#gap">gap</a> :  <input name="gap" type="text" value="5" class="int" />,
+	    <a href="https://github.com/mqchen/diamonds.js#hideincompleterow">hideIncompleteRow</a> : <select class="bool" name="hideIncompleteRow"><option value="true">true</option><option value="false" selected="selected">false</option></select>, <span class="comment">// default: false</span>
+	    <a href="https://github.com/mqchen/diamonds.js#autoredraw">autoRedraw</a> : <select class="bool" name="autoRedraw"><option value="true" selected="selected">true</option><option value="false">false</option></select>, <span class="comment">// default: true</span>
+	    <a href="https://github.com/mqchen/diamonds.js#itemselector">itemSelector</a> : <span class="string">".item"</span>
+	});
+	<span class="comment">// Check out your browser's console for <a href="https://github.com/mqchen/diamonds.js#methods">methods</a> and <a href="https://github.com/mqchen/diamonds.js#events">events</a> that are called.</span>
+	<span class="comment">// If autoRedraw is true, try resizing your browser window.</span>
+<span class="tag">&lt;/<span class="tagname">script</span>&gt;</span>
+</pre>
 		</form>
 	</div>
 	<div class="diamondswrap" id="flickrItems"></div>
+	<div class="footer">
+		Photos from Flickr via. <a href="http://www.flickr.com/services/feeds/docs/photos_public/">public API</a>
+	</div>
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="../src/jquery.diamonds.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			// Get photos from Flickr
-			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
-			{
-				format: "json",
-				tagmode: "any",
-				tags: "abstract"
-			}).done(function(data) {
-				var wrap = $("#flickrItems");
-				$.each(data.items, function(index, item) {
-					$("<a />").attr("href", item.link).addClass("item").css("background-image", "url(" + item.media.m + ")").appendTo(wrap);
-				});
-			}).always(function() {
-				initDiamonds($("#diamondsControls"), $("#flickrItems"));
-				initControls($("#diamondsControls"), $("#flickrItems"));
-			});
-
-
-			var initDiamonds = function(form, wrap) {
-				var opt = {};
-				$("[name]", form).each(function(index, input) {
-					var $input = $(input);
-					var val = $input.val();
-					if($input.hasClass("int")) {
-						val = parseInt(val);
-					}
-					if($input.hasClass("bool")) {
-						val = val.toLowerCase() === "true";
-					}
-					opt[$input.attr("name")] = val;
-				});
-
-				console.debug("Diamonds options:", opt);
-
-				if($(wrap).data("diamonds")) {
-					$(wrap).diamonds("destroy");
-				}
-				$(wrap).diamonds(opt);
-			};
-
-			var initControls = function(form, wrap) {
-				$("[name]", form).each(function(index, input) {
-					$(input).on("change", function(e) {
-						console.debug(e);
-						initDiamonds(form, wrap);
-					});
-				});				
-			}
-		});
-
-		$(document).load(function() {
-			// Prettyprint
-			prettyPrint();
-		})
-	</script>
+	<script type="text/javascript" src="demo.js"></script>
 </body>
 </html>

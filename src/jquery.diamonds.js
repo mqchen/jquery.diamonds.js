@@ -16,7 +16,10 @@
             rowUpperWrap : $('<div class="diamond-row-upper"></div>'),
             rowLowerWrap : $('<div class="diamond-row-lower"></div>'),
             diamondWrap : $('<div class="diamonds"></div>'),
-            overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }'
+            overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }',
+            debugEnabled : false,
+            debugEvent : function(event, data) { console.debug("Event: " + event, data); },
+            debugMethod : function(method, args) { console.debug("Method: " + method, args)}
         };
         this.wrapElement = customOptions.wrapElement;
 
@@ -44,6 +47,7 @@
      * Returns true if we should stop
      */
     Diamonds.prototype._triggerEvent = function(event, data) {
+        if(this.options.debugEnabled) this.options.debugEvent(event, data);
         var e = $.Event(this.options.eventPrefix + event);
         this.wrapElement.trigger(e, data);
         return e.isDefaultPrevented();
@@ -125,8 +129,16 @@
             
             if(this._triggerEvent("beforeSetOptions", customOptions)) return;
 
+            // Stop or start redraw
+            if(this.options.autoRedraw && !customOptions.autoRedraw) {
+                this.stopAutoRedraw();
+            }
+            else if(!this.options.autoRedraw && customOptions.autoRedraw) {
+                this.startAutoRedraw();
+            }
+
             $.extend(true, this.options, customOptions);
-            
+
             if(redraw) {
                 this._updateOverrideCss();
                 this.draw();
@@ -248,6 +260,7 @@
         if(Diamonds.prototype.hasOwnProperty(method)) {
             var args = Array.prototype.slice.call(arguments);
             args.shift();
+            if(inst.options.debugEnabled) inst.options.debugMethod(method, args);
             var ret = Diamonds.prototype[method].apply(inst, args);
             return ret === undefined ? this : ret;
         }
