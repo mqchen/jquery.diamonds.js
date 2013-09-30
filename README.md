@@ -32,32 +32,32 @@ js
 
 ## Options
 
-**size**
+### size
 
 Size of diamonds in pixels. Both width and height. Only squares allowed.
 
-**gap**
+### gap
 
 Pixels between each square. The size of the squares will be reduced by this gap.
 
-**itemSelector**
+### itemSelector
 
 The css selector to use to select diamonds-items.  
 Default: `.item`
 
-**hideIncompleteRow**
+### hideIncompleteRow
 
 Hide last row if there are not enough items to fill it completely.  
 Default: `false`
 
-**autoRedraw**
+### autoRedraw
 
 Auto redraw diamonds when it detects resizing.  
 Default: `true`
 
 ## Methods
 
-**Intialize**
+### *Intialize*
 
 	$(".diamondswrap").diamonds({
 	    size: 250, // Size of the squares
@@ -66,13 +66,13 @@ Default: `true`
 
 *Note*: Calling any other method before diamonds has been initialized will cause an error to be thrown.
 
-**draw**
+### draw
 
 Manually trigger a redraw. 
 
 	$(".diamondswrap").diamonds("draw");
 
-**setOptions**
+### setOptions
 
 Change options after initialize
 
@@ -82,7 +82,7 @@ Change options after initialize
 
 *Note*: Changing options will trigger a redraw since `size`, `gap`, or `hideIncompleteRow` might have changed..
 
-**destroy**
+### destroy
 
 Destroy diamonds and return everything to how it was.
 
