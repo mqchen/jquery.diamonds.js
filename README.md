@@ -11,7 +11,7 @@ Tired of straight grids where everything is vertically and horizontally aligned?
 
 ## Demo
 
-See `/demo/demo.html` in this repo.
+[See the demo page](http://mqchen.github.io/jquery.diamonds.js/) or checkout `/demo/demo.html` in this repo.
 
 ## Usage
 
