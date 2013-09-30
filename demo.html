@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jquery.diamonds.js demo</title>
+	<link rel="stylesheet" type="text/css" href="../src/diamonds.css" />
+	<link rel="stylesheet" type="text/css" href="demo.css" />
+</head>
+<body>
+	<div class="controls">
+		<form id="diamondsControls">
+			<pre class="code">
+<span class="tag">&lt;<span class="tagname">link</span> <span class="attrname">href</span>=<span class="attrval">"<a href="https://github.com/mqchen/diamonds.js/blob/master/src/diamonds.css">diamonds.css</a>"</span> /&gt;</span>
+<span class="tag">&lt;<span class="tagname">script</span> <span class="attrname">src</span>=<span class="attrval">"<a href="https://github.com/mqchen/diamonds.js/blob/master/src/jquery.diamonds.js">jquery.diamonds.js</a>"</span>&gt;</span><span class="tag">&lt;/<span class="tagname">script</span>&gt;</span>
+<span class="tag">&lt;<span class="tagname">script</span>&gt;</span>
+	<span class="var">$</span>(<span class="string">"#flickrItems"</span>).<a href="https://github.com/mqchen/diamonds.js">diamonds</a>({
+	    <a href="https://github.com/mqchen/diamonds.js#size">size</a> : <input name="size" type="text" value="200" class="int" />,
+	    <a href="https://github.com/mqchen/diamonds.js#gap">gap</a> :  <input name="gap" type="text" value="5" class="int" />,
+	    <a href="https://github.com/mqchen/diamonds.js#hideincompleterow">hideIncompleteRow</a> : <select class="bool" name="hideIncompleteRow"><option value="true">true</option><option value="false" selected="selected">false</option></select>, <span class="comment">// default: false</span>
+	    <a href="https://github.com/mqchen/diamonds.js#autoredraw">autoRedraw</a> : <select class="bool" name="autoRedraw"><option value="true" selected="selected">true</option><option value="false">false</option></select>, <span class="comment">// default: true</span>
+	    <a href="https://github.com/mqchen/diamonds.js#itemselector">itemSelector</a> : <span class="string">".item"</span>
+	});
+	<span class="comment">// Check out your browser's console for <a href="https://github.com/mqchen/diamonds.js#methods">methods</a> and <a href="https://github.com/mqchen/diamonds.js#events">events</a> that are called.</span>
+	<span class="comment">// If autoRedraw is true, try resizing your browser window.</span>
+<span class="tag">&lt;/<span class="tagname">script</span>&gt;</span>
+</pre>
+		</form>
+	</div>
+	<div class="diamondswrap" id="flickrItems"></div>
+	<div class="footer">
+		Photos from Flickr via. <a href="http://www.flickr.com/services/feeds/docs/photos_public/">public API</a>
+	</div>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../src/jquery.diamonds.js"></script>
+	<script type="text/javascript" src="demo.js"></script>
+</body>
+</html>
