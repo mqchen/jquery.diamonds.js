@@ -1,6 +1,7 @@
 {
-    "name": "Diamonds.js",
+    "name": "jquery.diamonds.js",
     "description": "Diamonds layout",
+    "homepage": "http://mqchen.github.io/jquery.diamonds.js/",
     "version": "0.0.1alpha",
     "private": true,
     "scripts": {
