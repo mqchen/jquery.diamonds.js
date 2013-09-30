@@ -180,7 +180,7 @@
     Diamonds.prototype.draw = function() {
         this._emptyElement(this.options.wrapElement);
 
-        var width = this.options.wrapElement.innerWidth() - this._getScrollbarWidth();
+        var width = this.options.wrapElement.width() - this._getScrollbarWidth();
         
         var rows = this._groupIntoRows(this.itemElements,
             Math.floor(width / this.options.size),
