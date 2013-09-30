@@ -216,13 +216,7 @@
 
         this._emptyElement(this.wrapElement);
 
-        // Zepto version
-        var width = this.wrapElement.width() 
-            - parseFloat("" + this.wrapElement.css("padding-left"))
-            - parseFloat("" + this.wrapElement.css("padding-right"))
-            - this._getScrollbarWidth();
-
-        // var width = this.wrapElement.innerWidth() - this._getScrollbarWidth(); // jQuery
+        var width = this.options.wrapElement.width() - this._getScrollbarWidth();
         
         var rows = this._groupIntoRows(this.itemElements,
             Math.floor(width / this.options.size),
