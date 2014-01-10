@@ -168,7 +168,7 @@
     };
     
     Diamonds.prototype._emptyElement = function(element) {
-        $("*", element).detach();
+        $("> *", element).detach();
     };
     
     Diamonds.prototype._groupIntoRows = function(items, maxDiamondsPerRow, hideIncompleteRow) {
