@@ -12,12 +12,11 @@
     clear: both;
 }
 .diamond-row-upper, .diamond-row-lower {
-    overflow: auto;
+    overflow: visible;
     clear: both;
     width: 100%;
 }
 .diamond-row-lower {
-    overflow: visible;
     position: absolute;
     bottom: 0;
 }
