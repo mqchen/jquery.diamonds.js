@@ -1,0 +1,36 @@
+{
+    "name": "diamonds",
+    "title": "jQuery Diamonds",
+    "description": "jQuery plugin for creating a diamond grid.",
+    "homepage": "https://github.com/mqchen/jquery.diamonds.js",
+    "demo": "http://mqchen.github.io/jquery.diamonds.js/",
+    "bugs": "https://github.com/mqchen/jquery.diamonds.js/issues",
+    "docs": "https://github.com/mqchen/jquery.diamonds.js/blob/master/README.md",
+    "keywords": [
+        "layout",
+        "css",
+        "ui"
+    ],
+    "version": "0.1.0",
+    "author": {
+        "name": "Moquan Chen",
+        "email": "mq.chen@gmail.com",
+        "url": "https://github.com/mqchen/"
+    },
+    "maintainers": [
+        {
+            "name": "Moquan Chen",
+            "email": "mq.chen@gmail.com",
+            "url": "https://github.com/mqchen/"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/mqchen/diamonds.js/master/LICENSE"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}

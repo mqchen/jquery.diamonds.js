@@ -1,0 +1,17 @@
+{
+    "name": "jquery.diamonds.js",
+    "description": "Diamonds layout",
+    "homepage": "http://mqchen.github.io/jquery.diamonds.js/",
+    "version": "0.0.1alpha",
+    "private": true,
+    "scripts": {
+        "test": "buster test"
+    },
+    "devDependencies": {
+        "buster": ">= 0.6"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mqchen/diamonds.js.git"
+    }
+}
