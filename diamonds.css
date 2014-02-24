@@ -12,7 +12,7 @@
     clear: both;
 }
 .diamond-row-upper, .diamond-row-lower {
-    overflow: auto;
+    overflow: hidden;
     clear: both;
     width: 100%;
 }
