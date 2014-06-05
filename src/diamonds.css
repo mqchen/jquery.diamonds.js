@@ -21,7 +21,7 @@
     bottom: 0;
 }
     .diamond-row-lower .diamond-box {
-        margin-left: 64.644660941%; /* 0.5 + 1 / sqrt(2) / 2 */
+        margin-left: 64.644660941%; /* 1 - 1 / sqrt(2) / 2 */
         margin-top: 64.644660941%;
     }
 
