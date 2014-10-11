@@ -18,8 +18,8 @@
             diamondWrap : $('<div class="diamonds"></div>'),
             overrideCss : '.diamonds-{{guid}} .diamond-box-wrap { width: {{size}}px; height: {{size}}px; } .diamonds-{{guid}} .diamond-box { border-width: {{gap}}px }',
             debugEnabled : false,
-            debugEvent : function(event, data) { console.debug("Event: " + event, data); },
-            debugMethod : function(method, args) { console.debug("Method: " + method, args)}
+            debugEvent : function(event, data) { if(console && console.log) { console.log("Event: " + event, data) }},
+            debugMethod : function(method, args) { if(console && console.log) { console.log("Method: " + method, args) }}
         };
         this.wrapElement = customOptions.wrapElement;
  
