@@ -114,7 +114,7 @@ Some events are also called with arguments. One such event is `beforeSetOptions`
 Some events can also abort the method by calling `.preventDefault`, for example if you want to prevent all drawing.
 
 	$(...).on("diamonds:beforeDraw", function(event) {
-		e.preventDefault(); // Stops the draw method
+		event.preventDefault(); // Stops the draw method
 	});
 
 As a rule of thumb, all events starting with `before` or `on` can abort the method.
