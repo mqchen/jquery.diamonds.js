@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// Get photos from Flickr
-	$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+	$.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
 	{
 		format: "json",
 		tagmode: "any",
